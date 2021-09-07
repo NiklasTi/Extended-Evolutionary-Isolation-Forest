@@ -1,5 +1,6 @@
-# This is the code to the master thesis extended evolutionary isolation forest.
-#
+# Extended Evolutionary Isolation Forest
+
+ This is the code to the master thesis extended evolutionary isolation forest.
  In this git, no data sets are provided, so a user needs to download these themselves. The data used for the thesis can be found under http://odds.cs.stonybrook.edu/
 
  To run the code, open tester.py and adjust the data set as needed.
