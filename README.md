@@ -8,6 +8,6 @@
  Parameters that can be easily adjusted in tester.py are iterations and threshold for anomaly scores.
  The further parameters can be adjusted in EEIF.py and extended_iForest.py
  
- The results will be saved as a .csv in the results folder.
+ The results will be saved as a .csv in the results folder together with a seperate .csv file for the scores.
 
  Code for the WTG experiments are not provided in this reposititory.
