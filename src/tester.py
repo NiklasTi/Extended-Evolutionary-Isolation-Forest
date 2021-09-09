@@ -1,5 +1,4 @@
 import numpy as np
-import time
 import scipy.io
 import csv
 
@@ -41,7 +40,7 @@ def get_precision_and_recall(results, labels):
 # Writes the anomaly scores to a csv file
 def score_list(scores, labels):
     results_string = "../results/EEIF_scores.csv"
-    auc_list = np.stack((s, lab), axis=-1)
+    auc_list = np.stack((scores, labels), axis=-1)
     with open(results_string, 'a', newline='') as csvfile:
         results_csv = csv.writer(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
         results_csv.writerow(['Scores', 'Labels'])
@@ -58,8 +57,6 @@ def run():
     labels = data_set['y']
     iteration = 100                                                                      # Adjust Iterations as needed
     threshold = 0.25                                                                     # Adjust Threshold as needed
-
-    current_time = time.time()
 
     AD = EEIF(
         data,
