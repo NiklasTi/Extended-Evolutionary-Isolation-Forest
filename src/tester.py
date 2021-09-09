@@ -40,7 +40,7 @@ def get_precision_and_recall(results, labels):
 
 # Writes the anomaly scores to a csv file
 def score_list(scores, labels):
-    results_string = "results/EEIF_scores.csv"
+    results_string = "../results/EEIF_scores.csv"
     for sig_idx, label in labels.items():
         if scores.get(sig_idx) is None:
             continue
@@ -85,15 +85,14 @@ def run():
     return precision, recall, true_positive_count, true_negative_count, false_negative_count, false_positive_count
 
 
-# Writes the resulting precision and recall as well as TP, TN, FN and FP into a csv file
-results_string = 'results/EEIF_precision_recall.csv'
-f = open(results_string, "x")
-f.close()
-
-
-headers = ['Precision', 'Recall', 'TP', 'TN', 'FN', 'FP']
+# Executes the run() function and writes the resulting precision and recall as well as TP, TN, FN and FP into a csv file
 p, r, tp, tn, fn, fp = run()
 total_results = p, r, tp, tn, fn, fp
+
+results_string = '../results/EEIF_precision_recall.csv'
+f = open(results_string, "x")
+f.close()
+headers = ['Precision', 'Recall', 'TP', 'TN', 'FN', 'FP']
 with open(results_string, 'a', newline='') as csvfile:
     results_csv = csv.writer(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
     results_csv.writerow(headers)
