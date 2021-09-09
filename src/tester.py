@@ -77,7 +77,7 @@ def run():
         threshold
     )
 
-    results, scores = AD.run_full_test()
+    results, scores = AD.run_full_test(data)
 
     score_list(scores, labels)
     precision, recall, true_positive_count, true_negative_count, false_negative_count, false_positive_count = get_precision_and_recall(results, labels)
