@@ -41,22 +41,12 @@ def get_precision_and_recall(results, labels):
 # Writes the anomaly scores to a csv file
 def score_list(scores, labels):
     results_string = "../results/EEIF_scores.csv"
-    for sig_idx, label in labels.items():
-        if scores.get(sig_idx) is None:
-            continue
-        s, lab = [], []
-        score = scores[sig_idx]
-        for l, f, m_idx in label:
-            s.append(score[m_idx])
-            lab.append(l)
-
-        auc_list = np.stack((s, lab), axis=-1)
-
-        with open(results_string, 'a', newline='') as csvfile:
-            for i in range(len(auc_list)):
-                results_csv = csv.writer(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
-                results_csv.writerow(auc_list[i])
-            csvfile.close()
+    auc_list = np.stack((s, lab), axis=-1)
+    with open(results_string, 'a', newline='') as csvfile:
+    for i in range(len(auc_list)):
+        results_csv = csv.writer(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
+        results_csv.writerow(auc_list[i])
+    csvfile.close()
 
 
 # The function to run the EEIF code. The dataset, iterations and thresholds can be adjusted here
