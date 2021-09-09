@@ -43,8 +43,9 @@ def score_list(scores, labels):
     results_string = "../results/EEIF_scores.csv"
     auc_list = np.stack((s, lab), axis=-1)
     with open(results_string, 'a', newline='') as csvfile:
+        results_csv = csv.writer(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
+        results_csv.writerow(['Scores', 'Labels'])
         for i in range(len(auc_list)):
-            results_csv = csv.writer(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
             results_csv.writerow(auc_list[i])
         csvfile.close()
 
