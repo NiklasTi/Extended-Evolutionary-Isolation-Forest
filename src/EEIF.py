@@ -78,7 +78,7 @@ class EEIF(object):
 
         # Update the trees for a given number of iteration by performing mutation and crossover operations
         if self.iteration > 0:
-            for _ in trange(self.iteration):
+            for _ in range(self.iteration):
                 off_size = int(np.ceil(self.num_tree * 3))
                 for num in range(off_size):
                     if np.random.uniform() < 0.8:
