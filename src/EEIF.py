@@ -17,10 +17,10 @@ class EEIF(object):
         self.labels = labels
         self.iteration = iteration
         self.threshold = threshold
-        self.sub_sample_size = min(len(data), 256)
-        self.num_tree = 100
-        self.lr = 1 / np.sqrt(self.num_tree)
-        self.ls = np.ceil(np.log2(self.sub_sample_size))
+        self.sub_sample_size = min(len(data), 256)                              # The sample size of sub data used for constructing the trees
+        self.num_tree = 100                                                     # The number of trees constructed
+        self.lr = 1 / np.sqrt(self.num_tree)                                    # The learning rate
+        self.ls = np.ceil(np.log2(self.sub_sample_size))                        # The maximum depth allowed to reach in a tree
         self.sigma = {}
         self.bound = []
         self.forest = {}
@@ -39,7 +39,7 @@ class EEIF(object):
                 dtype=np.float64
             ).T
             bounds.append(bound)
-            forest.append(Node(sub_data, bound, 0, self.ls, data_dim, data_dim-1))               # check extension level
+            forest.append(Node(sub_data, bound, 0, self.ls, data_dim, data_dim-1))               # check extension level, currently set to data_dim-1
 
         scoress, avg_scores, = \
             [], []
@@ -96,7 +96,7 @@ class EEIF(object):
                             [np.amin(sub_data, axis=0), np.amax(sub_data, axis=0)],
                             dtype=np.float64
                         ).T
-                        child = Node(sub_data, bound, 0, self.ls, data_dim, data_dim-1)          # check extension level
+                        child = Node(sub_data, bound, 0, self.ls, data_dim, data_dim-1)                # check extension level, , currently set to data_dim-1
                         c_sigma = 1 / 4 / np.sqrt(self.num_tree) * np.exp(np.random.randn())
 
                     forest.append(child)
@@ -116,7 +116,7 @@ class EEIF(object):
     def mutate(self, indi, sig, bound, dim):
         child = Copy_Node(indi)
         sig = sig * np.exp(self.lr * np.random.randn())
-        child.mutate(sig, bound, dim, dim-1)                                                     # check extension level
+        child.mutate(sig, bound, dim, dim-1)                                                          # check extension level, , currently set to dim-1
         return child, sig
 
 
