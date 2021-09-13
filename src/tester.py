@@ -55,10 +55,10 @@ def score_list(scores, labels):
 # The function to run the EEIF code. The dataset, iterations and thresholds can be adjusted here
 
 def run():
-    data_set = scipy.io.loadmat('../annthyroid.mat')                                     		# Adjust the dataset
+    data_set = scipy.io.loadmat('.mat')                                     		 # Adjust the dataset
     data = np.array(data_set['X'])
     labels = data_set['y']
-    iteration = 1                                                                    # Adjust Iterations
+    iteration = 100                                                                  # Adjust Iterations
     threshold = 0.3                                                                  # Adjust Threshold
 
     AD = EEIF(
