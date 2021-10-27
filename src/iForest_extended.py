@@ -90,14 +90,13 @@ class Copy_Node(Empty_Node):
         if self.inter is not None:
 
             if np.random.uniform() < sigma * 4:
-                idxs = np.random.choice(range(dim), dim - exlevel - 1, replace=False)  # Picks the indices for which the normal vector elements should be set to zero 
-                self.normal = np.random.normal(0, 1, dim)  				# A random normal vector picked form a uniform n-sphere.
+                idxs = np.random.choice(range(dim), dim - exlevel - 1, replace=False) 
+                self.normal = np.random.normal(0, 1, dim)  				
                 self.normal[idxs] = 0
                 self.inter = np.random.uniform(bound[:, 0], bound[:, 1])
+                
             self.inter = self.inter + sigma * np.random.randn() * (bound[:, 1] - bound[:, 0])
-
             self.inter = np.amin([np.amax([self.inter, bound[:,0]], axis=0), bound[:,1]], axis=0)
-
             self.left.mutate(sigma, bound, dim)
             self.right.mutate(sigma, bound, dim)
         else:
