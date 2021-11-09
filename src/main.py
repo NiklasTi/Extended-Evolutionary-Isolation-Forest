@@ -41,7 +41,9 @@ def get_precision_and_recall(results, labels):
 # Writes the anomaly scores to a csv file
 
 def score_list(scores, labels):
+    # Adjust the location and name of the scores file
     results_string = "../results/EEIF_scores.csv"
+    
     l = np.array(labels).reshape(-1)
     s = np.array(scores).reshape(-1)
     with open(results_string, 'a', newline='') as csvfile:
@@ -56,11 +58,11 @@ def score_list(scores, labels):
 # Executes the main() function and writes the resulting precision and recall as well as TP, TN, FN and FP into a csv file
 
 def main():
-    data_set = scipy.io.loadmat('../datasets/thyroid.mat')  # Adjust the dataset
+    data_set = scipy.io.loadmat('.mat')    # Adjust the dataset
     data = np.array(data_set['X'])
     labels = data_set['y']
-    iteration = 0  # Adjust Iterations
-    threshold = 0.3  # Adjust Threshold
+    iteration = 100                        # Adjust Iterations
+    threshold = 0.3                        # Adjust Threshold
 
     AD = EEIF(
         data,
@@ -72,6 +74,7 @@ def main():
     results, scores = AD.run_full_test(data)
 
     score_list(scores, labels)
+    
     precision, recall, true_positive_count, \
     true_negative_count, false_negative_count, false_positive_count = get_precision_and_recall(results, labels)
 
@@ -80,8 +83,10 @@ def main():
 
     total_results = precision, recall, true_positive_count, \
                     true_negative_count, false_negative_count, false_positive_count
-
+    
+    # Adjust the location and name of the precision and recall file
     results_string = '../results/EEIF_precision_recall.csv'
+    
     f = open(results_string, "x")
     f.close()
     headers = ['Precision', 'Recall', 'TP', 'TN', 'FN', 'FP']
